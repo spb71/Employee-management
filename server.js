@@ -61,7 +61,7 @@ viewAllRoles = () => {
 
 viewAllEmployees = async () => {
     connection.query(
-        "SELECT * FROM employee LEFT JOIN role ON employee.title=roleInfo.title LEFT JOIN department ON roleInfo.department_id=department.id",
+        "SELECT * FROM employee LEFT JOIN roleInfo ON employee.title=roleInfo.title LEFT JOIN department ON roleInfo.department_id=department.id",
         (err, res) => {
             if (err) throw err;
             console.table(res);
