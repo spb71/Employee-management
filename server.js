@@ -13,11 +13,11 @@ connection.connect((err) => {
     start();
 })
 
-start = () => {
+const start = () => {
     userChoose();
 }
 
-userChoose = async () => {
+const userChoose = async () => {
     const answers = await inquirer.prompt([
         {
             type: "list",
@@ -38,7 +38,7 @@ userChoose = async () => {
     select(answers);
 }
 
-viewAllDepartments = () => {
+const viewAllDepartments = () => {
     connection.query(
         "SELECT * FROM department", 
         (err, res) => {
@@ -49,7 +49,7 @@ viewAllDepartments = () => {
     )
 }
 
-viewAllRoles = () => {
+const viewAllRoles = () => {
     connection.query(
         "SELECT * FROM roleInfo", (err, res) => {
             if (err) throw err;
@@ -59,7 +59,7 @@ viewAllRoles = () => {
     )
 }
 
-viewAllEmployees = async () => {
+const viewAllEmployees = async () => {
     connection.query(
         "SELECT * FROM employee LEFT JOIN roleInfo ON employee.title=roleInfo.title LEFT JOIN department ON roleInfo.department_id=department.id",
         (err, res) => {
@@ -70,7 +70,7 @@ viewAllEmployees = async () => {
     )
 }
 
-addDepartment = () => {
+const addDepartment = () => {
     inquirer.prompt([
         {
             type: "input",
@@ -90,7 +90,7 @@ addDepartment = () => {
     })
 }
 
-addRole = () => {
+const addRole = () => {
     connection.query("SELECT * FROM department", (err, res) => {
         if (err) throw err;
 
@@ -146,7 +146,7 @@ addRole = () => {
     })
 }
 
-addEmployee = () => {
+const addEmployee = () => {
     //read the employees first
     connection.query("SELECT * FROM roleInfo", async (err, res) => {
         if (err) throw err;
@@ -198,7 +198,7 @@ addEmployee = () => {
     })
 };
 
-updateRole = () => {
+const updateRole = () => {
     //pull all the employees first
     connection.query("SELECT * FROM employee", (err, res) => {
         if (err) throw err;
@@ -256,7 +256,7 @@ updateRole = () => {
     })
 }
 
-select = (answers) => {
+const select = (answers) => {
     switch (answers.action) {
 
         //view ALL
